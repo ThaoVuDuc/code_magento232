@@ -1,0 +1,111 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_Quickview
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+?>
+<?php
+$helper = $this->helper('Bss\Quickview\Helper\Data');
+$btnTextColor = $helper->getBtnTextColor();
+$baseUrl = $helper->getBaseUrl();
+$buttonText = $helper->getButtonText();
+$btnBackground = $helper->getBtnBackground();
+list($r, $g, $b) = sscanf($btnBackground, "%02x%02x%02x");
+$productUrl = $helper->getUrl();
+$buttonText = $helper->getButtonText();
+$isEnabled = $helper->enabled();
+$productItemInfo = $helper->getProductItemInfo();
+$productImageWrapper = $helper->getProductImageWrapper();
+?>
+
+<style>
+    a.bss-quickview{
+        color: #<?php echo $btnTextColor; ?>;
+        position: absolute;
+        display: block;
+        bottom: 0px;
+        padding: 3px 10px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+    }
+    a.bss-quickview::before{
+        color: #<?php echo $btnTextColor; ?>;
+        background-color: rgba(<?php echo "$r , $g , $b"; ?>,0.4);  
+        width: 100%;
+        height: 100%;
+        content: "";
+        position: absolute;
+        z-index:3;
+        -webkit-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+    }
+
+    a.bss-quickview span {
+        border-radius: 100%;
+        position: absolute;
+        border: 2px solid #fff;
+        left: 50%;
+        top: 50%;
+        text-align: center;
+        line-height: 37px;
+        z-index: 2;
+        width: 40px;
+        height: 40px;
+        -webkit-transform: scale(0) translate(-50%, -50%);
+        transform: scale(0) translate(-50%, -50%);
+        transition: all 0.3s ease 0s;
+        -webkit-transition: all 0.3s ease 0s;
+    }
+    .product-item .product-item-info:hover .bss-quickview span{
+        -webkit-transform: scale(1) translate(-50%, -50%);
+        transform: scale(1) translate(-50%, -50%);
+        transition: all 0.3s ease 0s;
+        -webkit-transition: all 0.3s ease 0s;
+    }
+    .product-item .product-item-info:hover .bss-quickview{
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        position: absolute !important;
+        bottom: 0px !important;
+        left: 0px !important;
+        margin: 0;
+        z-index: 2 !important;
+        width: 100% !important;
+        height:100%;
+        padding: 0;
+        text-align: center !important;
+        font-size: 34px !important;
+        text-decoration: none !important;
+    }
+    #shopping-cart-table .bss-quickview {display: none !important}
+    .products-related .product-item-info:hover .bss-quickview, .products-upsell .product-item-info:hover .bss-quickview {display: none !important}
+</style>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Bss_Quickview/js/bss_config": {
+                "productUrl": "<?php echo $productUrl; ?>",
+                "buttonText": "<?php echo $buttonText; ?>",
+                "isEnabled": "<?php echo $isEnabled; ?>",
+                "baseUrl": "<?php echo $baseUrl; ?>",
+                "productItemInfo": "<?php echo $productItemInfo; ?>",
+                "productImageWrapper": "<?php echo $productImageWrapper; ?>"
+            }
+        }
+    }
+</script>

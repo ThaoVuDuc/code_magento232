@@ -1,0 +1,6 @@
+Current version of tests is for Magento CE 2.3.3 (with Default Magento Sample Data) with Amasty Improved Layered Navigation 2.12.14 only.
+
+Prior to tests running it is required to launch PreConfigureAttributesTest.xml. This test works around Magento bug with Attribute Options duplication.
+
+In order to receive correct run of image checkings it is necessary to store a couple of images (with the following name/file format: 1.jpeg, 2.png, 3.jpg) in magento_root/dev/tests/acceptance/tests/_data folder.
+In order to avoid timeout error while tests are running we highly recommend to increase "pageload_timeout:" in magento_root/dev/tests/acceptance/tests/functional.suite.yml
